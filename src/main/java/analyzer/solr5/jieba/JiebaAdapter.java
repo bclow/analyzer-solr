@@ -40,9 +40,7 @@ public class JiebaAdapter implements Iterator<SegToken> {
 				e.printStackTrace();
 				System.out.println("load userDict: " + userDictPath + " fail!");
 			}
-		} else {
-			System.out.println("load userDict: " + userDictPath + " ??");
-		}
+		} 
 	}
 
 	public synchronized void reset(Reader input) {

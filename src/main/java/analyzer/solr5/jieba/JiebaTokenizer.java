@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class JiebaTokenizer extends Tokenizer {
-
-
 	private CharTermAttribute termAtt;
 	private OffsetAttribute offsetAtt;
 	private TypeAttribute typeAtt;
@@ -33,9 +31,13 @@ public class JiebaTokenizer extends Tokenizer {
 	@Override
 	public boolean incrementToken() throws IOException {
 		clearAttributes();
-		if(jieba.hasNext()){
+        while(jieba.hasNext()) {
 			SegToken token = jieba.next();
-			termAtt.append(token.word.getToken());
+            if(token.word.getToken().equals(" ")) {
+                continue;
+            }
+//			termAtt.append(token.word.getToken());
+			termAtt.append(token.word);
 			termAtt.setLength(token.word.length());
 			offsetAtt.setOffset(token.startOffset, token.endOffset);
 			endPosition = token.endOffset;
